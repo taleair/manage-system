@@ -36,7 +36,7 @@
 
                         {
                         index : 'assetViewer',
-                        title: '产品计划查询'
+                        title: '产品计划管理'
                         }
                       ]
                     },

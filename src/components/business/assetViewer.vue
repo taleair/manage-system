@@ -4,7 +4,7 @@
 <div class="crumbs">
     <el-breadcrumb separator="/">
         <el-breadcrumb-item><i class="el-icon-menu"></i> 网金社</el-breadcrumb-item>
-        <el-breadcrumb-item>产品计划查询</el-breadcrumb-item>
+        <el-breadcrumb-item>产品计划管理</el-breadcrumb-item>
     </el-breadcrumb>
 </div>
   <div class="form-box">
@@ -45,7 +45,26 @@
             </el-table-column>
             <el-table-column prop="status" label="产品状态" min-width="80">
             </el-table-column>
-            <el-table-column fixed="right"  label="操作" min-width="100">
+            <el-table-column fixed="right"  label="操作" min-width="200">
+              <template scope="scope">
+                  <span v-if="scope.row.status == 4">
+                  <el-button size="small" type="primary"
+                          @click="handleEdit(scope.$index, scope.row)">打包</el-button>
+                  <el-button size="small" type="danger"
+                          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                          <el-button size="small"
+                                  @click="handleDelete(scope.$index, scope.row)">详情</el-button>
+                  </span>
+
+                  <span v-else>
+                  <el-button size="small" type="primary"
+                          @click="handleEdit(scope.$index, scope.row)">发送</el-button>
+                          <el-button size="small"
+                                  @click="handleDelete(scope.$index, scope.row)">详情</el-button>
+                  </span>
+
+
+              </template>
             </el-table-column>
         </el-table>
         <!--<div class="pagination">
@@ -124,7 +143,9 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                this.$message('编辑第'+(index+1)+'行');
+                //this.$message('编辑第'+(index+1)+'行');
+
+
             },
             handleDelete(index, row) {
                 this.$message.error('删除第'+(index+1)+'行');
