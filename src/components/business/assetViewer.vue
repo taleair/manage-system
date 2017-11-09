@@ -2,37 +2,50 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 表格</el-breadcrumb-item>
-                <el-breadcrumb-item>基础表格</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i> 网金社</el-breadcrumb-item>
+                <el-breadcrumb-item>产品计划查询</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
 
+
+        <div class="block">
+            <span class="demonstration">带快捷选项</span>
+            <el-date-picker
+              v-model="value2"
+              align="right"
+              type="date"
+              placeholder="选择日期"
+              :picker-options="pickerOptions1">
+            </el-date-picker>
+          </div>
+
+
         <el-table :data="tableData" border stripe >
-            <el-table-column fixed prop="date" label="序号" min-width="90">
+            <el-table-column fixed type="index" label="序号" min-width="90">
             </el-table-column>
-            <el-table-column fixed prop="name" label="产品编号" min-width="130">
+            <el-table-column fixed prop="no" label="产品编号" min-width="130">
             </el-table-column>
-            <el-table-column fixed prop="name" label="产品名称" min-width="130">
+            <el-table-column fixed prop="name" label="产品名称" min-width="300">
             </el-table-column>
-            <el-table-column prop="name" label="上架日期" min-width="130">
+            <el-table-column prop="sellDate" label="上架日期" min-width="150">
             </el-table-column>
-            <el-table-column prop="name" label="下架日期" min-width="130">
+            <el-table-column prop="shutDate" label="下架日期" min-width="150">
             </el-table-column>
-            <el-table-column prop="name" label="产品发行金额" min-width="130">
+            <el-table-column prop="issueAmount" label="产品发行金额" min-width="80">
             </el-table-column>
-            <el-table-column prop="name" label="发行利率" min-width="130">
+            <el-table-column prop="issueRate" label="发行利率" min-width="80">
             </el-table-column>
-            <el-table-column prop="name" label="基础资产情况" min-width="130">
+            <el-table-column prop="pkgCount" label="基础资产情况" min-width="110">
             </el-table-column>
-            <el-table-column prop="name" label="起息日期" min-width="130">
+            <el-table-column prop="interestDate" label="起息日期" min-width="150">
             </el-table-column>
-            <el-table-column prop="name" label="到期日起">
+            <el-table-column prop="endDate" label="到期日起"  min-width="150">
             </el-table-column>
-            <el-table-column prop="name" label="打包金额">
+            <el-table-column prop="pkgAmount" label="打包金额" min-width="80">
             </el-table-column>
-            <el-table-column prop="name" label="产品状态">
+            <el-table-column prop="status" label="产品状态" min-width="80">
             </el-table-column>
-            <el-table-column prop="name" label="操作">
+            <el-table-column fixed="right"  label="操作" min-width="100">
             </el-table-column>
         </el-table>
         <div class="pagination">
@@ -66,7 +79,12 @@
                 let self = this;
 
                 self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProductPool', {pageSize:20}).then((res) => {
-                    self.tableData = res.data.dataBody.data;
+                    try{
+                      self.tableData = res.data.dataBody.data;
+                    } catch (e){
+
+                    }
+
                 })
             },
             formatter(row, column) {
@@ -84,3 +102,18 @@
         }
     }
 </script>
+
+
+<style>
+.el-table td, .el-table th {
+    padding: 0px 4px;
+    text-align:center;
+}
+
+.el-table .cell, .el-table th>div {
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+}
+</style>
