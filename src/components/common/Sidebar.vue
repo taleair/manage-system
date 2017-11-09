@@ -29,6 +29,11 @@
                       title:"网金社",
                       index:'-1',
                       subs : [
+                      {
+                      index : 'assetCreater',
+                      title: '产品计划导入'
+                      },
+
                         {
                         index : 'assetViewer',
                         title: '产品计划查询'

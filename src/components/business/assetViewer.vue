@@ -1,25 +1,25 @@
 <template>
+
+<div>
+<div class="crumbs">
+    <el-breadcrumb separator="/">
+        <el-breadcrumb-item><i class="el-icon-menu"></i> 网金社</el-breadcrumb-item>
+        <el-breadcrumb-item>产品计划查询</el-breadcrumb-item>
+    </el-breadcrumb>
+</div>
+  <div class="form-box">
+  <div class="el-form-item">
+    <span class="demonstration">导入时间</span>
+    <el-date-picker
+      v-model="value2"
+      align="right"
+      type="date"
+      placeholder="选择日期"
+      :picker-options="pickerOptions1">
+    </el-date-picker>
+    </div>
+  </div>
     <div class="table">
-        <div class="crumbs">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 网金社</el-breadcrumb-item>
-                <el-breadcrumb-item>产品计划查询</el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
-
-
-        <div class="block">
-            <span class="demonstration">带快捷选项</span>
-            <el-date-picker
-              v-model="value2"
-              align="right"
-              type="date"
-              placeholder="选择日期"
-              :picker-options="pickerOptions1">
-            </el-date-picker>
-          </div>
-
-
         <el-table :data="tableData" border stripe >
             <el-table-column fixed type="index" label="序号" min-width="90">
             </el-table-column>
@@ -48,13 +48,14 @@
             <el-table-column fixed="right"  label="操作" min-width="100">
             </el-table-column>
         </el-table>
-        <div class="pagination">
+        <!--<div class="pagination">
             <el-pagination
                     @current-change ="handleCurrentChange"
                     layout="prev, pager, next"
                     :total="1000">
             </el-pagination>
-        </div>
+        </div> -->
+    </div>
     </div>
 </template>
 
@@ -64,7 +65,36 @@
             return {
                 url: '../../../static/vuetable.json',
                 tableData: [],
-                cur_page: 1
+                cur_page: 1,
+                pickerOptions0: {
+                  disabledDate(time) {
+                    return time.getTime() > Date.now();
+                  }
+                },
+                pickerOptions1: {
+                  shortcuts: [{
+                    text: '今天',
+                    onClick(picker) {
+                      picker.$emit('pick', new Date());
+                    }
+                  }, {
+                    text: '昨天',
+                    onClick(picker) {
+                      const date = new Date();
+                      date.setTime(date.getTime() - 3600 * 1000 * 24);
+                      picker.$emit('pick', date);
+                    }
+                  }, {
+                    text: '一周前',
+                    onClick(picker) {
+                      const date = new Date();
+                      date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                      picker.$emit('pick', date);
+                    }
+                  }]
+                },
+                value1: '',
+                value2: ''
             }
         },
         created(){
@@ -115,5 +145,9 @@
     padding-right: 4px;
     box-sizing: border-box;
     text-overflow: ellipsis;
+}
+.el-date-picker .el-picker-panel__content {
+    min-width: 224px;
+    width: 224px;
 }
 </style>

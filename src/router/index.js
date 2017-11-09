@@ -18,6 +18,10 @@ export default new Router({
                     component: resolve => require(['../components/page/Readme.vue'], resolve)
                 },
                 {
+                    path: '/assetCreater',
+                    component: resolve => require(['../components/business/assetCreater.vue'], resolve)
+                },
+                {
                     path: '/assetViewer',
                     component: resolve => require(['../components/business/assetViewer.vue'], resolve)
                 },
