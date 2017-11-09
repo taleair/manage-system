@@ -66,7 +66,6 @@
                 let self = this;
 
                 self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProductPool', {pageSize:20}).then((res) => {
-                    //self.tableData = res.data.list;？？
                     self.tableData = res.data.dataBody.data;
                 })
             },
