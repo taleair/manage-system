@@ -69,12 +69,10 @@
 
             let self = this;
             try{
-            self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/createProduct', {pageSize:20}).then((res) => {
+            self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/createProduct', {this.form}).then((res) => {
                   self.tableData = res.data.dataBody.data;
                   this.$message.success('提交成功！');
                   onCanel();
-
-
             })
 
             } catch (e){
