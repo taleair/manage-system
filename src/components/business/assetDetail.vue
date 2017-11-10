@@ -1,6 +1,6 @@
 <template>
 <div class="table">
-    <el-table :data="tableData" border stripe >
+    <el-table v-loading="loading" :data="tableData" border stripe >
         <el-table-column fixed type="index" label="序号" min-width="90">
         </el-table-column>
         <el-table-column  prop="no" label="产品编号" min-width="130">
@@ -58,14 +58,19 @@
         data() {
             return {
                 tableData: [],
+                loading: true,
                 productId:this.$route.query.productId
             }
+
         },
         created(){
+          this.loading=true;
           this.getData();
+
         },
         methods: {
           getData(){
+
               let self = this;
               var queryParam = {pageSize:100000};
               //queryParam.datetimeBegin = this.param.dateTime.Format("yyyy-MM-dd");
@@ -76,8 +81,11 @@
                   } catch (e){
 
                   }
-              })
+                  this.loading=false;
+              });
+
             }
+
         }
     }
 </script>
