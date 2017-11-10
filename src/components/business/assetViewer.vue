@@ -11,9 +11,10 @@
   <div class="el-form-item">
     <span class="demonstration">导入时间</span>
     <el-date-picker
-      v-model="value2"
+      v-model="param.dateTime"
       align="right"
       type="date"
+      @change="getData()"
       placeholder="选择日期"
       :picker-options="pickerOptions1">
     </el-date-picker>
@@ -53,7 +54,7 @@
                   <el-button size="small" type="danger"
                           @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                           <el-button size="small"
-                                  @click="handleDelete(scope.$index, scope.row)">详情</el-button>
+                                  @click="handleDetail(scope.$index, scope.row)">详情</el-button>
                   </span>
 
                   <span v-else>
@@ -82,9 +83,8 @@
     export default {
         data() {
             return {
-                url: '../../../static/vuetable.json',
+
                 tableData: [],
-                cur_page: 1,
                 pickerOptions0: {
                   disabledDate(time) {
                     return time.getTime() > Date.now();
@@ -112,8 +112,9 @@
                     }
                   }]
                 },
-                value1: '',
-                value2: ''
+                param:{
+                  dateTime:new Date()
+                }
             }
         },
         created(){
@@ -126,8 +127,12 @@
             },
             getData(){
                 let self = this;
+                var queryParam = {pageSize:100000};
 
-                self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProductPool', {pageSize:20}).then((res) => {
+                console.info(this.param.dateTime);
+                //queryParam.datetimeBegin = this.param.dateTime.Format("yyyy-MM-dd");
+                //queryParam.datetimeEnd = this.param.dateTime.Format("yyyy-MM-dd");
+                self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProductPool', queryParam).then((res) => {
                     try{
                       self.tableData = res.data.dataBody.data;
                     } catch (e){
@@ -149,6 +154,9 @@
             },
             handleDelete(index, row) {
                 this.$message.error('删除第'+(index+1)+'行');
+            },
+            handleDetail(index,row){
+              this.$router.push("assetDetail?productId="+row.productId);
             }
         }
     }

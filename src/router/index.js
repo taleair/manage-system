@@ -25,7 +25,11 @@ export default new Router({
                     path: '/assetViewer',
                     component: resolve => require(['../components/business/assetViewer.vue'], resolve)
                 },
-
+                ,
+                {
+                    path: '/assetDetail',
+                    component: resolve => require(['../components/business/assetDetail.vue'], resolve)
+                },
                 {
                     path: '/basetable',
                     component: resolve => require(['../components/page/BaseTable2.vue'], resolve)
