@@ -40,7 +40,7 @@
                         },
 
                           {
-                          index : 'assetViewer',
+                          index : 'queryAssetPool',
                           title: '资产池'
                           }
                       ]

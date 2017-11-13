@@ -1,4 +1,44 @@
 <template>
+<div>
+  <div class="crumbs">
+    <el-breadcrumb separator="/">
+        <el-breadcrumb-item><i class="el-icon-menu"></i> 网金社</el-breadcrumb-item>
+        <el-breadcrumb-item>产品计划管理</el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
+
+
+  <div class="form-box">
+  <el-form ref="form" :model="param" label-width="100px">
+  <div class="el-form-item">
+    <span class="demonstration">放款开始时间:</span>
+    <el-date-picker
+      v-model="param.dateTimeBegin"
+      align="right"
+      type="date"
+      placeholder="选择日期"
+      :picker-options="pickerOptions1">
+    </el-date-picker>
+
+    <span class="demonstration">放款结束时间:</span>
+    <el-date-picker
+      v-model="param.dateTimeEnd"
+      type="date"
+      placeholder="选择日期"
+      :picker-options="pickerOptions1">
+    </el-date-picker>
+
+    <span class="demonstration">资产状态</span>
+    <el-select v-model="param.status" placeholder="请选择">
+        <el-option key="bbk" label="步步高" value="bbk"></el-option>
+        <el-option key="xtc" label="小天才" value="xtc"></el-option>
+        <el-option key="imoo" label="imoo" value="imoo"></el-option>
+    </el-select>
+    </div>
+    </el-form>
+  </div>
+
+
 <div class="table">
     <el-table v-loading="loading" :data="tableData" border stripe >
         <el-table-column fixed type="index" label="序号" min-width="90">
@@ -51,6 +91,7 @@
         </el-table-column>
     </el-table>
 </div>
+</div>
 </template>
 
 <script>
@@ -58,15 +99,46 @@
         data() {
             return {
                 tableData: [],
-                loading: true,
-                productId:this.$route.query.productId
+                loading: false,
+                productId:'1',
+                pickerOptions0: {
+                  disabledDate(time) {
+                    return time.getTime() > Date.now();
+                  }
+                },
+                pickerOptions1: {
+                  shortcuts: [{
+                    text: '今天',
+                    onClick(picker) {
+                      picker.$emit('pick', new Date());
+                    }
+                  }, {
+                    text: '昨天',
+                    onClick(picker) {
+                      const date = new Date();
+                      date.setTime(date.getTime() - 3600 * 1000 * 24);
+                      picker.$emit('pick', date);
+                    }
+                  }, {
+                    text: '一周前',
+                    onClick(picker) {
+                      const date = new Date();
+                      date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+                      picker.$emit('pick', date);
+                    }
+                  }]
+                },
+                param:{
+                  dateTimeBegin:new Date(),
+                  dateTimeEnd:new Date(),
+                  status:"bbk"
+                }
             }
 
         },
         created(){
-          this.loading=true;
-          this.getData();
-
+          //this.loading=true;
+          //this.getData();
         },
         methods: {
           getData(){

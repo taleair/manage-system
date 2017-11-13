@@ -30,6 +30,12 @@ export default new Router({
                     path: '/assetDetail',
                     component: resolve => require(['../components/business/assetDetail.vue'], resolve)
                 },
+
+                {
+                    path: '/queryAssetPool',
+                    component: resolve => require(['../components/business/queryAssetPool.vue'], resolve)
+                },
+
                 {
                     path: '/basetable',
                     component: resolve => require(['../components/page/BaseTable2.vue'], resolve)
