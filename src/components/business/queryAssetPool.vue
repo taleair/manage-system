@@ -10,32 +10,31 @@
 
   <div class="form-box">
   <el-form ref="form" :model="param" label-width="100px">
-  <div class="el-form-item">
-
+  <div class="el-form-item" style="width:1000px;">
+    <span class="demonstration">放款开始时间:</span>
     <el-date-picker
-      label="放款开始时间"
       v-model="param.dateTimeBegin"
       align="right"
       type="date"
       placeholder="选择日期"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions1" style="width:130px;">
     </el-date-picker>
 
-
+    <span class="demonstration">放款结束时间:</span>
     <el-date-picker
-    label="放款结束时间"
       v-model="param.dateTimeEnd"
       type="date"
       placeholder="选择日期"
-      :picker-options="pickerOptions1">
+      :picker-options="pickerOptions1" style="width:130px;">
     </el-date-picker>
 
-
-    <el-select v-model="param.status" label="状态" placeholder="请选择">
+    <span class="demonstration">资产状态</span>
+    <el-select v-model="param.status" placeholder="请选择">
         <el-option key="bbk" label="步步高" value="bbk"></el-option>
         <el-option key="xtc" label="小天才" value="xtc"></el-option>
         <el-option key="imoo" label="imoo" value="imoo"></el-option>
     </el-select>
+    <el-button type="primary"  style="float:right;">查询</el-button>
     </div>
     </el-form>
   </div>
