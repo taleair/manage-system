@@ -37,7 +37,12 @@
                         {
                         index : 'assetViewer',
                         title: '产品计划管理'
-                        }
+                        },
+
+                          {
+                          index : 'assetViewer',
+                          title: '资产池'
+                          }
                       ]
                     },
 
