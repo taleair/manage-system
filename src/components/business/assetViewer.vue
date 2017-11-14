@@ -32,7 +32,7 @@
             </el-table-column>
             <el-table-column prop="shutDate" label="下架日期" min-width="150">
             </el-table-column>
-            <el-table-column prop="issueAmount" label="产品发行金额" min-width="80">
+            <el-table-column prop="issueAmount" label="产品发行金额" min-width="120">
             </el-table-column>
             <el-table-column prop="issueRate" label="发行利率" min-width="80">
             </el-table-column>

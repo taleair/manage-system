@@ -35,7 +35,14 @@ export default new Router({
                     path: '/queryAssetPool',
                     component: resolve => require(['../components/business/queryAssetPool.vue'], resolve)
                 },
-
+                {
+                    path: '/importAsset',
+                    component: resolve => require(['../components/business/importAssetExcel.vue'], resolve)
+                },
+                {
+                    path: '/excelDemo',
+                    component: resolve => require(['../components/page/excelDemo.vue'], resolve)
+                },
                 {
                     path: '/basetable',
                     component: resolve => require(['../components/page/BaseTable2.vue'], resolve)

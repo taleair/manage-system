@@ -33,7 +33,10 @@
                       index : 'assetCreater',
                       title: '产品计划导入'
                       },
-
+                      {
+                      index : 'importAsset',
+                      title: '批量导入产品计划'
+                      },
                         {
                         index : 'assetViewer',
                         title: '产品计划管理'
@@ -42,7 +45,9 @@
                           {
                           index : 'queryAssetPool',
                           title: '资产池'
-                          }
+                          },
+
+
                       ]
                     },
 
@@ -98,6 +103,11 @@
                         icon: 'el-icon-upload2',
                         index: 'drag',
                         title: '拖拽'
+                    },
+                    {
+                        icon: 'el-icon-upload2',
+                        index: 'excelDemo',
+                        title: 'excel'
                     }
                 ]
             }
