@@ -47,7 +47,7 @@
             <el-table-column prop="status" label="产品状态" min-width="80">
             </el-table-column>
             <el-table-column fixed="right"  label="操作" min-width="200">
-              <template scope="scope">
+              <!-- <template scope="scope">
                   <span v-if="scope.row.status == 4">
                   <el-button size="small" type="primary"
                           @click="handleEdit(scope.$index, scope.row)">打包</el-button>
@@ -63,8 +63,12 @@
                           <el-button size="small"
                                   @click="handleDelete(scope.$index, scope.row)">详情</el-button>
                   </span>
-
-
+              </template> -->
+              <template>
+                <el-button size="small" type="primary"
+                        @click="handlePackage(scope.$index, scope.row)">打包</el-button>
+                <el-button size="small"
+                        @click="handleDelete(scope.$index, scope.row)">详情</el-button>
               </template>
             </el-table-column>
         </el-table>
@@ -126,20 +130,18 @@
                 this.getData();
             },
             getData(){
-                let self = this;
                 var queryParam = {pageSize:100000};
+                var _moment = this.$moment;
 
-                console.info(this.param.dateTime);
-                //queryParam.datetimeBegin = this.param.dateTime.Format("yyyy-MM-dd");
-                //queryParam.datetimeEnd = this.param.dateTime.Format("yyyy-MM-dd");
-                self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProductPool', queryParam).then((res) => {
+                queryParam.datetimeBegin = _moment(this.param.dateTime).format("YYYY-MM-DD");
+                queryParam.datetimeEnd = _moment(this.param.dateTime).add(1,"d").format("YYYY-MM-DD");
+                this.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProduct', queryParam).then((res) => {
                     try{
-                      self.tableData = res.data.dataBody.data;
+                      this.tableData = res.data.dataBody.data;
                     } catch (e){
 
                     }
-
-                })
+                });
             },
             formatter(row, column) {
                 return row.address;
@@ -147,9 +149,16 @@
             filterTag(value, row) {
                 return row.tag === value;
             },
-            handleEdit(index, row) {
+            handlePackage(index, row) {
                 //this.$message('编辑第'+(index+1)+'行');
+                self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/packageProduct', {no:row.no}).then((res) => {
+                    try{
+                      this.$message('打包成功');
+                    } catch (e){
 
+                    }
+
+                });
 
             },
             handleDelete(index, row) {

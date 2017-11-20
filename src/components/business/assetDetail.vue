@@ -59,7 +59,7 @@
             return {
                 tableData: [],
                 loading: true,
-                productId:this.$route.query.productId
+                productNo:this.$route.query.productNo
             }
 
         },
@@ -73,6 +73,7 @@
 
               let self = this;
               var queryParam = {pageSize:100000};
+              queryParam.productNo = this.productNo;
               //queryParam.datetimeBegin = this.param.dateTime.Format("yyyy-MM-dd");
               //queryParam.datetimeEnd = this.param.dateTime.Format("yyyy-MM-dd");
               self.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProductDetail', queryParam).then((res) => {

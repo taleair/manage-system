@@ -67,6 +67,13 @@
 									<el-input v-model="scope.row.pkgCount"/>
 							</template>
 						</el-table-column>
+
+						<el-table-column fixed="right"  label="操作" min-width="80">
+              <template scope="scope">
+                          <el-button size="small" type="danger"
+                                  @click="handleDetail(scope.$index)">删除</el-button>
+							</template>
+						</el-table-column>
 				</el-table>
 	</div>
 </div>
@@ -102,9 +109,22 @@ export default {
 				/**
 				提交
 				*/
+				this.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/batchInsertProduct', this.tableData).then((res) => {
+						try{
+							this.$message("上传成功");
+							this.tableData = [];
+						} catch (e){
+								logger.error(e);
+						}
+				});
+			},
 
-
-
+			handleDetail(rowIndex){
+				//delete this.tableData[rowIndex];
+				//console.info(this.tableData);
+				//this.tableData.remove(rowIndex);
+				//console.info(this.tableData);
+				this.tableData.splice(rowIndex,1);
 			},
 			_suppress(evt) { evt.stopPropagation(); evt.preventDefault(); },
 			_drop(evt) {
@@ -131,7 +151,8 @@ export default {
 					/* Update state */
 					// this.data = data;
 
-					console.info(data.length);
+					this.tableData = [];
+
 					if(!data.length || data.length < 2) return;
 					for(var i = 1 ; i < data.length;i++){
 						var obj = {};
