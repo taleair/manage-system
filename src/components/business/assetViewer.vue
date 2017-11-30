@@ -1,5 +1,4 @@
 <template>
-
 <div>
 <div class="crumbs">
     <el-breadcrumb separator="/">
@@ -137,7 +136,7 @@
                 queryParam.datetimeEnd = _moment(this.param.dateTime).add(1,"d").format("YYYY-MM-DD");
                 this.$axios.post('/weishang-manager-webservice/wsAdmin/wjs/queryProduct', queryParam).then((res) => {
                     try{
-                      this.tableData = res.data.dataBody.data;
+                      console.info(res);
                     } catch (e){
 
                     }
