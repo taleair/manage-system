@@ -45,12 +45,40 @@
                           {
                           index : 'queryAssetPool',
                           title: '资产池'
-                          },
+                          }
 
 
                       ]
                     },
+                    {
+                      icon: 'el-icon-date',
+                      title:"众安后台管理",
+                      index:'1',
+                      subs : [
+                      {
+                      index : 'assetCreater',
+                      title: '授信申请'
+                      },
+                      {
+                      index : 'importAsset',
+                      title: '借款申请'
+                      },
+                      {
+                      index : 'assetViewer',
+                      title: '逾期还款任务'
+                      },
 
+                      {
+                      index : 'queryAssetPool',
+                      title: '归集还款任务'
+                      },
+                      {
+                      index : 'queryAssetPool',
+                      title: '代偿处理任务'
+                      }
+                      ]
+
+                    },
                     {
                         icon: 'el-icon-setting',
                         index: 'readme',
