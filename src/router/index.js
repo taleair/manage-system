@@ -13,6 +13,35 @@ export default new Router({
             path: '/readme',
             component: resolve => require(['../components/common/Home.vue'], resolve),
             children:[
+
+
+              //<!-- 众安相关begin-->
+              {
+                  path: '/zaCollectionRepayInfo',
+                  component: resolve => require(['../components/business/za/businessManage/collectionRepayInfo.vue'], resolve)
+              },
+              {
+                  path: '/zaConfirmInfo',
+                  component: resolve => require(['../components/business/za/businessManage/confirmInfo.vue'], resolve)
+              },
+              {
+                  path: '/zaCreditApplyInfo',
+                  component: resolve => require(['../components/business/za/businessManage/creditApplyInfo.vue'], resolve)
+              },
+              {
+                  path: '/zaDelayRepayInfo',
+                  component: resolve => require(['../components/business/za/businessManage/delayRepayInfo.vue'], resolve)
+              },
+              {
+                  path: '/zaProxyPayInfo',
+                  component: resolve => require(['../components/business/za/businessManage/proxyPayInfo.vue'], resolve)
+              },
+              {
+                  path: '/zaProxyPayMsgInfo',
+                  component: resolve => require(['../components/business/za/businessManage/proxyPayMsgInfo.vue'], resolve)
+              },
+
+              //<!-- 众安相关end-->
                 {
                     path: '/',
                     component: resolve => require(['../components/page/Readme.vue'], resolve)

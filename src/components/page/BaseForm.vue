@@ -75,9 +75,18 @@
         },
         methods: {
             onSubmit() {
-                this.$message.success('提交成功！');
+                //this.$message.success('提交成功！');
                 //alert(this.form.name);
                 //this.form.name = "1111";
+                this.$axios.post('/weishang-manager-webservice/wsAdmin/getDict', {aaa:"aaa"}).then((res) => {
+                    try{
+                      //self.tableData = res.data.dataBody.data;
+                      //alert(res);
+                    } catch (e){
+
+                    }
+                    this.loading=false;
+                });
             }
         }
     }

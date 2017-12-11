@@ -1,24 +1,24 @@
+<!-- 逾期还款 -->
 <template>
 <div>
   <div class="crumbs">
       <el-breadcrumb separator="/">
           <el-breadcrumb-item><i class="el-icon-menu"></i> 众安后台管理</el-breadcrumb-item>
-          <el-breadcrumb-item>授信申请</el-breadcrumb-item>
+          <el-breadcrumb-item>逾期还款</el-breadcrumb-item>
       </el-breadcrumb>
   </div>
-
-
   <div class="form-box">
-  <div class="el-form-item">
-    <el-form-item label="表单名称">
-        <el-input v-model="bizTransCode"></el-input>
-    </el-form-item>
-    </div>
+    <el-form>
+        <el-input type="text" v-model="bizNo" placeholder="bizNo"></el-input>
+        <el-form-item>
+        <el-button type="primary" @click="getData">查询</el-button>
+        </el-form-item>
+    </el-form>
   </div>
 
 
 <div class="table">
-    <el-table v-loading="loading" :data="tableData" border stripe >
+    <el-table :v-loading="loading" :data="tableData" border stripe >
         <el-table-column fixed type="index" label="序号" min-width="90">
         </el-table-column>
         <el-table-column  prop="bizNo" label="业务编号" min-width="130">
@@ -52,7 +52,7 @@
             return {
                 tableData: [],
                 loading: true,
-                productNo:this.$route.query.productNo
+                bizNo:""
             }
 
         },
@@ -63,13 +63,12 @@
         },
         methods: {
           getData(){
-
               let self = this;
               var queryParam = {pageSize:100000};
-              queryParam.productNo = this.productNo;
+              queryParam.bizNo = this.bizNo;
               //queryParam.datetimeBegin = this.param.dateTime.Format("yyyy-MM-dd");
               //queryParam.datetimeEnd = this.param.dateTime.Format("yyyy-MM-dd");
-              self.$axios.post('/weishang-manager-webservice/wsAdmin/za/queryProductDetail', queryParam).then((res) => {
+              self.$axios.post('/weishang-manager-webservice/mgt/order/queryRepayTaskList', queryParam).then((res) => {
                   try{
                     //self.tableData = res.data.dataBody.data;
                     self.tableData = res.data;

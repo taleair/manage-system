@@ -9,16 +9,13 @@
 
 
   <div class="form-box">
-  <div class="el-form-item">
-    <el-form-item label="表单名称">
-        <el-input v-model="bizTransCode"></el-input>
-    </el-form-item>
-    </div>
+    <el-form>
+        <el-input type="text" v-model="bizTransCode" placeholder="bizTransCode"></el-input>
+        <el-button @click="getData">查询</el-button>
+    </el-form>
   </div>
-
-
 <div class="table">
-    <el-table v-loading="loading" :data="tableData" border stripe >
+    <el-table :v-loading="loading" :data="tableData" border stripe >
         <el-table-column fixed type="index" label="序号" min-width="90">
         </el-table-column>
         <el-table-column  prop="bizChannel" label="业务渠道" min-width="130">
@@ -67,14 +64,14 @@
         data() {
             return {
                 tableData: [],
-                loading: true,
-                productNo:this.$route.query.productNo
+                loading: false,
+                bizTransCode:""
             }
 
         },
         created(){
-          this.loading=true;
-          this.getData();
+          // this.loading=true;
+          // this.getData();
 
         },
         methods: {
@@ -82,15 +79,14 @@
 
               let self = this;
               var queryParam = {pageSize:100000};
-              queryParam.productNo = this.productNo;
+              queryParam.bizTransCode = this.bizTransCode;
+
               //queryParam.datetimeBegin = this.param.dateTime.Format("yyyy-MM-dd");
-              //queryParam.datetimeEnd = this.param.dateTime.Format("yyyy-MM-dd");
-              self.$axios.post('/weishang-manager-webservice/wsAdmin/za/queryProductDetail', queryParam).then((res) => {
+              // queryParam.datetimeEnd = this.param.dateTime.Format("yyyy-MM-dd");
+              self.$axios.post('/weishang-manager-webservice/mgt/order/queryLoanOrderList', queryParam).then((res) => {
                   try{
-                    //self.tableData = res.data.dataBody.data;
                     self.tableData = res.data;
                   } catch (e){
-                    
                   }
                   this.loading=false;
               });

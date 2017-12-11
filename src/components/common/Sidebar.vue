@@ -56,24 +56,24 @@
                       index:'1',
                       subs : [
                       {
-                      index : 'assetCreater',
+                      index : 'zaConfirmInfo',
                       title: '授信申请'
                       },
                       {
-                      index : 'importAsset',
+                      index : 'zacreditApplyInfo',
                       title: '借款申请'
                       },
                       {
-                      index : 'assetViewer',
+                      index : 'zaDelayRepayInfo',
                       title: '逾期还款任务'
                       },
 
                       {
-                      index : 'queryAssetPool',
+                      index : 'zaCollectionRepayInfo',
                       title: '归集还款任务'
                       },
                       {
-                      index : 'queryAssetPool',
+                      index : 'zaProxyPayInfo',
                       title: '代偿处理任务'
                       }
                       ]

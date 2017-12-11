@@ -29,7 +29,33 @@ module.exports = {
         assetsPublicPath: '/',
         proxyTable: {
             '/weishang-manager-webservice':{
-                target:'http://localhost:8080/weishang-manager-webservice/',
+                target:'http://192.168.60.7:8080/ws/',
+                changeOrigin:true,
+                pathRewrite:{
+                    '/weishang-manager-webservice':''
+                }
+            },
+            '/ms':{
+                target: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
+                changeOrigin: true
+            }
+        },
+        // CSS Sourcemaps off by default because relative paths are "buggy"
+        // with this option, according to the CSS-Loader README
+        // (https://github.com/webpack/css-loader#sourcemaps)
+        // In our experience, they generally work as expected,
+        // just be aware of this issue when enabling this option.
+        cssSourceMap: false
+    },
+    test: {
+        env: require('./dev.env'),
+        port: 38080,
+        autoOpenBrowser: true,
+        assetsSubDirectory: 'static',
+        assetsPublicPath: '/',
+        proxyTable: {
+            '/weishang-manager-webservice':{
+                target:'http://127.0.0.1:50181/weishang-manager-webservice/',
                 changeOrigin:true,
                 pathRewrite:{
                     '/weishang-manager-webservice':''
