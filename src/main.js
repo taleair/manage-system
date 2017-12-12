@@ -52,7 +52,7 @@ axios.interceptors.response.use(resp => {// 响应成功关闭loading
     return {};
   } else if(400 == statusCode){
     alert("登录信息错误，请重新登录！");
-  //  location.href='http://test-cms.weishangtech.com/login?sys=6&callback=https://manager.weishangtech.com/#/index';
+    location.href='http://test-cms.weishangtech.com/login?sys=6&callback=http://test-api.weishangtech.com/weishang-manager-webservice/index.html#/readme';
   }
   //后台框架提供，后台框架提供者Joshua Ding o(^_^)0~~~~
   // console.info(resp.data.dataBody);
