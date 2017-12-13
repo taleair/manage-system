@@ -44,7 +44,7 @@ export default new Router({
                 },
                 {
                     path: '/importAsset',
-                    component: resolve => require(['../components/business/importAssetExcel.vue'], resolve)
+                    component: resolve => require(['../components/business/asset/importAssetExcel.vue'], resolve)
                 },
               {
                   path: '/zaCollectionRepayInfo',
