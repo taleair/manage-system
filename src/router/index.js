@@ -7,15 +7,45 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/login'
+            redirect: '/readme'
         },
         {
             path: '/readme',
             component: resolve => require(['../components/common/Home.vue'], resolve),
             children:[
-
+              {
+                path: '/welcome',
+                component: resolve => require(['../components/business/loan/Readme.vue'], resolve)
+              },
 
               //<!-- 众安相关begin-->
+
+              {
+                    path: '/',
+                    component: resolve => require(['../components/page/Readme.vue'], resolve)
+                },
+                {
+                    path: '/assetCreater',
+                    component: resolve => require(['../components/business/asset/assetCreater.vue'], resolve)
+                },
+                {
+                    path: '/assetViewer',
+                    component: resolve => require(['../components/business/asset/assetViewer.vue'], resolve)
+                },
+                ,
+                {
+                    path: '/assetDetail',
+                    component: resolve => require(['../components/business/asset/assetDetail.vue'], resolve)
+                },
+
+                {
+                    path: '/queryAssetPool',
+                    component: resolve => require(['../components/business/asset/queryAssetPool.vue'], resolve)
+                },
+                {
+                    path: '/importAsset',
+                    component: resolve => require(['../components/business/importAssetExcel.vue'], resolve)
+                },
               {
                   path: '/zaCollectionRepayInfo',
                   component: resolve => require(['../components/business/za/businessManage/collectionRepayInfo.vue'], resolve)
@@ -39,71 +69,23 @@ export default new Router({
               {
                   path: '/zaProxyPayMsgInfo',
                   component: resolve => require(['../components/business/za/businessManage/proxyPayMsgInfo.vue'], resolve)
-              },
+              }
 
               //<!-- 众安相关end-->
-                {
-                    path: '/',
-                    component: resolve => require(['../components/page/Readme.vue'], resolve)
-                },
-                {
-                    path: '/assetCreater',
-                    component: resolve => require(['../components/business/assetCreater.vue'], resolve)
-                },
-                {
-                    path: '/assetViewer',
-                    component: resolve => require(['../components/business/assetViewer.vue'], resolve)
-                },
-                ,
-                {
-                    path: '/assetDetail',
-                    component: resolve => require(['../components/business/assetDetail.vue'], resolve)
-                },
-
-                {
-                    path: '/queryAssetPool',
-                    component: resolve => require(['../components/business/queryAssetPool.vue'], resolve)
-                },
-                {
-                    path: '/importAsset',
-                    component: resolve => require(['../components/business/importAssetExcel.vue'], resolve)
-                },
-                {
-                    path: '/excelDemo',
-                    component: resolve => require(['../components/page/excelDemo.vue'], resolve)
-                },
-                {
-                    path: '/basetable',
-                    component: resolve => require(['../components/page/BaseTable2.vue'], resolve)
-                },
-                {
-                    path: '/vuetable',
-                    component: resolve => require(['../components/page/VueTable.vue'], resolve)     // vue-datasource组件
-                },
-                {
-                    path: '/baseform',
-                    component: resolve => require(['../components/page/BaseForm.vue'], resolve)
-                },
-                {
-                    path: '/vueeditor',
-                    component: resolve => require(['../components/page/VueEditor.vue'], resolve)    // Vue-Quill-Editor组件
-                },
-                {
-                    path: '/markdown',
-                    component: resolve => require(['../components/page/Markdown.vue'], resolve)     // Vue-Quill-Editor组件
-                },
-                {
-                    path: '/upload',
-                    component: resolve => require(['../components/page/Upload.vue'], resolve)       // Vue-Core-Image-Upload组件
-                },
-                {
-                    path: '/basecharts',
-                    component: resolve => require(['../components/page/BaseCharts.vue'], resolve)   // vue-echarts-v3组件
-                },
-                {
-                    path: '/drag',
-                    component: resolve => require(['../components/page/DragList.vue'], resolve)    // 拖拽列表组件
+                //loan后台
+                ,{
+                    path: '/loanList',
+                    component: resolve => require(['../components/business/loan/loanList.vue'], resolve)
                 }
+                ,{
+                    path: '/loanRepayList',
+                    component: resolve => require(['../components/business/loan/repayList.vue'], resolve)
+                }
+                ,{
+                    path: '/loanList_jx',
+                    component: resolve => require(['../components/business/loan/loanList_jx.vue'], resolve)
+                }
+
             ]
         },
         {
