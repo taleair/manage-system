@@ -18,9 +18,9 @@
 		</header>
 			<el-form :inline="true" class="demo-form-inline">
 					<el-form-item label="时间">
-						<el-date-picker :style="displayDatePicker" v-model="queryByDayDate" type="date" format="yyyy-MM-DD" placeholder="请选择">
+						<el-date-picker :style="displayDatePicker" v-model="queryByDayDate" type="date" placeholder="请选择">
 						</el-date-picker>
-						<el-date-picker :style="displayMonthPicker" v-model="queryByDayDate" type="month" format="yyyy-MM" placeholder="请选择">
+						<el-date-picker :style="displayMonthPicker" v-model="queryByDayDate" type="month" placeholder="请选择">
 						</el-date-picker>
 					</el-form-item>
 					<el-form-item>

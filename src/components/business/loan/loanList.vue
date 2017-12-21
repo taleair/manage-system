@@ -16,29 +16,28 @@
 		</header>
 			<el-form :inline="true" class="demo-form-inline">
 					<el-form-item label="时间">
-						<el-date-picker :style="displayDatePicker" v-model="queryByDayDate" type="date" format="yyyy-MM-DD" placeholder="请选择">
+						<el-date-picker :style="displayDatePicker" v-model="queryByDayDate" type="date"  placeholder="请选择">
 						</el-date-picker>
-						<el-date-picker :style="displayMonthPicker" v-model="queryByDayDate" type="month" format="yyyy-MM" placeholder="请选择">
+						<el-date-picker :style="displayMonthPicker" v-model="queryByDayDate" type="month" placeholder="请选择">
 						</el-date-picker>
 					</el-form-item>
 					<el-form-item>
 						<el-button class='select' type="primary" @click="fetchData">查询</el-button>
 					</el-form-item>
 			</el-form>
-	<el-tabs v-model="activeName" type="card">
-	 <el-tab-pane label="总计" name="totalTab">
-		 <span>本{{monOrDayDesc}}放款金额数 </span><em>{{initData.loanAmount || 0}}</em>
-		 <span>本{{monOrDayDesc}}放款案件数 </span><em>{{initData.loanOrderNum || 0}}</em>
-	 </el-tab-pane>
-	 <el-tab-pane label="众安" name="zaTab">
-		 <span>本{{monOrDayDesc}}放款金额数 </span><em>{{initData.loanAmount || 0}}</em>
-		 <span>本{{monOrDayDesc}}放款案件数 </span><em>{{initData.loanOrderNum || 0}}</em>
-	 </el-tab-pane>
-	 <el-tab-pane label="金鑫小贷" name="jxxdTab">
-		 <span>本{{monOrDayDesc}}放款金额数 </span><em>{{initData.loanAmount || 0}}</em>
-		 <span>本{{monOrDayDesc}}放款案件数 </span><em>{{initData.loanOrderNum || 0}}</em>
-	 </el-tab-pane>
- </el-tabs>
+ <el-tabs v-model="activeChannelTab" type="card">
+ <el-tab-pane
+	 v-for="(item, index) in channelList"
+	 :key="item.name"
+	 :label="item.title"
+	 :name="item.name"
+ >
+	 <span>本{{monOrDayDesc}}放款金额数 </span><em>{{item.loanAmount || 0}}</em>
+	 <span>本{{monOrDayDesc}}放款案件数 </span><em>{{item.loanOrderNum || 0}}</em>
+ </el-tab-pane>
+</el-tabs>
+
+
 	<br />
 	<br />
 		<section class="loan_table">
@@ -106,6 +105,8 @@
 				displayMonthPicker:"display:none",
 				dateRangeType : "day",
 				monOrDayDesc : "日",
+				channelList:[{title:"test",name:"测试"}],
+				activeChannelTab:"total",
 				getDateRange : function(choseDate,queryType){
 						var result = {};
 						if("day" == queryType) {
@@ -120,6 +121,8 @@
 			}
 		},
 		created() {
+			this.genChannelTabs([{channelDesc:"全部",loanChannel:"total"},{channelDesc:"众安",loanChannel:"za"},{channelDesc:"测试",loanChannel:"test"}]);
+
 		},
 		watch: {　　　　　　　
 
@@ -128,6 +131,38 @@
 
 		},
 		methods: {
+			genChannelTabs(srcChannelList){
+
+				var dictChannelList = [];
+				if (srcChannelList != null && srcChannelList.length > 0){
+					for(var i = 0 ; i < srcChannelList.length;i++){
+						dictChannelList.push({title:srcChannelList[i].channelDesc,name:srcChannelList[i].loanChannel});
+					}
+				}
+				this.channelList = dictChannelList;
+			},
+			fillLoanAmountTab(srcLoanAmount){
+				//总计
+				var total_item = this.channelList.getItemByEntityValue("name","total");
+				total_item.loanAmount = srcLoanAmount.loanAmount;
+				total_item.loanOrderNum = srcLoanAmount.totalCount;
+				//各个分开统计
+				var details = srcLoanAmount.details;
+				if(details != null && details.length > 0){
+					for(var i = 0 ; i < details.length ; i++){
+						var src_item = details[i];
+						var src_item_channelCode = src_item.channelCode;
+						//获取tab item
+						var entity_item = this.channelList.getItemByEntityValue("name",src_item_channelCode);
+						//赋值
+						entity_item.loanAmount = src_item.loanAmount;
+						entity_item.loanOrderNum = src_item.loanOrderNum;
+					}
+				}
+			},
+			testChange(arg1,arg2,arg3){
+				console.info(this.queryByDayDate);
+			},
 			//changeQueryType
 			changeQueryType(tab, event){
 				var tabIndex = tab.index;
@@ -184,23 +219,28 @@
 					'channelId':'LCC201709190004'
 				};
 
-				this.$axios.post(this.Api.loanDetail, params).then((res) => {
+				this.$axios.post("/weishang-manager-webservice/wsAdmin/loanDetail.security", params).then((res) => {
 				this.datatable = res.data;
 				this.total = res.totalcount;
 				this.per_page = res.pageSize;
 				this.current = res.pageSize;
-				console.info(res);
 				});
 			},
+			//获取放款渠道菜单
+
+			//统计信息
 			getloanAmount(dateRange) {
 				let loanAmountParam = {
 					"datetimeBegin": dateRange.queryByDayDateBegin,
-					"datetimeEnd": dateRange.queryByDayDateEnd,
-					'channelId':'LCC201709190004'
+					"datetimeEnd": dateRange.queryByDayDateEnd
 				};
 
 				this.$axios.post("/weishang-manager-webservice/wsAdmin/loanAmount.security", loanAmountParam).then((res) => {
-					this.initData = res;
+					this.fillLoanAmountTab(res);
+					//这里有bug必须重新刷新tab要不值不更新
+					this.activeChannelTab = "";
+					this.activeChannelTab = "total";
+
 				});
 			}
 

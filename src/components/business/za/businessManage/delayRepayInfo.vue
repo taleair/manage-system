@@ -58,7 +58,7 @@
         },
         created(){
           this.loading=true;
-          this.getData();
+          //this.getData();
 
         },
         methods: {
@@ -66,11 +66,8 @@
               let self = this;
               var queryParam = {pageSize:100000};
               queryParam.bizNo = this.bizNo;
-              //queryParam.datetimeBegin = this.param.dateTime.Format("yyyy-MM-dd");
-              //queryParam.datetimeEnd = this.param.dateTime.Format("yyyy-MM-dd");
-              self.$axios.post('/weishang-manager-webservice/mgt/order/queryRepayTaskList', queryParam).then((res) => {
+              self.$axios.post('/weishang-manager-webservice/mgt/task/queryRepayTaskList', queryParam).then((res) => {
                   try{
-                    //self.tableData = res.data.dataBody.data;
                     self.tableData = res.data;
                   } catch (e){
 

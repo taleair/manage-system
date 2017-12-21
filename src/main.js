@@ -29,6 +29,22 @@ function _getUrlParam(name){
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
 }
+//垃圾方法，丑陋的一比以后改
+Array.prototype.getItemByEntityValue = function(key,value){
+  var _thisLength = this.length ;
+  if(_thisLength == 0){
+    return {};
+  }
+  for(var i = 0 ; i < _thisLength ; i++){
+    var _val = this[i][key];
+    if(_val === value){
+      return this[i];
+    }
+  }
+  return {};
+}
+
+
 Vue.prototype.$getUrlParam = _getUrlParam;
 axios.interceptors.request.use(config => {
   var _url = config.url;
@@ -50,7 +66,9 @@ axios.interceptors.response.use(resp => {// 响应成功关闭loading
     return {};
   } else if(400 == statusCode){
     alert("登录信息错误，请重新登录！");
-    location.href='http://test-cms.weishangtech.com/login?sys=6&callback=http://test-api.weishangtech.com/weishang-manager-webservice/index.html#/readme';
+    //location.href='http://test-cms.weishangtech.com/login?sys=6&callback=http://test-api.weishangtech.com/weishang-manager-webservice/index.html#/readme';
+    //location.href='http://test-cms.weishangtech.com/login?sys=6&callback=http://localhost:38080/#/readme';
+  //  location.href='https://cms.weishangtech.com/login?sys=3&callback=https://manager.weishangtech.com/weishang-manager-webservice/index.html#/readme';
   }
   //后台框架提供，后台框架提供者Joshua Ding o(^_^)0~~~~
   // console.info(resp.data.dataBody);

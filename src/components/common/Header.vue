@@ -18,20 +18,21 @@
     export default {
         data() {
             return {
-                name: 'linxin'
+                name: '您好'
             }
         },
         computed:{
             username(){
-                let username = localStorage.getItem('ms_username');
-                return username ? username : this.name;
+                //let username = localStorage.getItem('ms_username');
+                return '您好';
             }
         },
         methods:{
             handleCommand(command) {
                 if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
-                    this.$router.push('/login');
+                    //localStorage.removeItem('ms_username')
+                    //this.$router.push('/login');
+                    location.href = "https://cms.weishangtech.com/logout?sys=2&redirect=https%3a%2f%2fmanager.weishangtech.com%2fweishang-manager-webservice%2findex.html%23%2freadme"
                 }
             }
         }

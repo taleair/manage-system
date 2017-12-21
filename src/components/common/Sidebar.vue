@@ -50,25 +50,32 @@
           var za_menu = {icon:'el-icon-date',title:"众安后台管理",index:'1',subs:[{index:'zaConfirmInfo',title:'授信申请'},{index:'zacreditApplyInfo',title:'借款申请'},{index:'zaDelayRepayInfo',title:'逾期还款任务'},{index:'zaCollectionRepayInfo',title:'归集还款任务'},{index:'zaProxyPayInfo',title:'代偿处理任务'}]};
           //获取权限
           var access_token = this.$getUrlParam("access_token");
-          this.$axios.post("/weishang-manager-webservice/wsAdmin/getMeum.security?access_token="+access_token, {}).then((res) => {
-              var userKind = res;
-              //管理员
-              if("admin" == userKind){
-                this.items.push(ws_cw_menu);
-                this.items.push(jxxd_menu);
-                this.items.push(wjs_menu);
-                this.items.push(za_menu);
-              }
-              //金鑫小贷
-              else if("customer_jx" == userKind){
-                this.items.push(jxxd_menu);
-                //蔚商财务人员
-              } else if("customer_cw" == userKind){
-                this.items.push(ws_cw_menu);
-                this.items.push(jxxd_menu);
-              }
-          });
-
+          // this.$axios.post("/weishang-manager-webservice/wsAdmin/getMeum.security?access_token="+access_token, {}).then((res) => {
+          //     var userKind = res;
+          //     //管理员
+          //     if("admin" == userKind){
+          //       this.items.push(ws_cw_menu);
+          //       this.items.push(jxxd_menu);
+          //       this.items.push(wjs_menu);
+          //       this.items.push(za_menu);
+          //     }
+          //     //金鑫小贷
+          //     else if("customer_jx" == userKind){
+          //       this.items.push(jxxd_menu);
+          //       //蔚商财务人员
+          //     } else if("customer_cw" == userKind){
+          //       this.items.push(ws_cw_menu);
+          //       this.items.push(jxxd_menu);
+          //     }
+          //     this.items.push(ws_cw_menu);
+          //     this.items.push(jxxd_menu);
+          //     this.items.push(wjs_menu);
+          //     this.items.push(za_menu);
+          // });
+              this.items.push(ws_cw_menu);
+              this.items.push(jxxd_menu);
+              this.items.push(wjs_menu);
+              this.items.push(za_menu);
         }
     }
 </script>
