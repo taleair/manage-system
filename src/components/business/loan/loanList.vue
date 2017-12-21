@@ -131,6 +131,9 @@
 
 		},
 		methods: {
+			clearAmountTab(){
+				//等测试提bug再写，现在能满足要求
+			},
 			genChannelTabs(srcChannelList){
 
 				var dictChannelList = [];
