@@ -32,7 +32,7 @@
 	 :label="item.title"
 	 :name="item.name"
  >
-	 <span>本{{monOrDayDesc}}放款金额数 </span><em>{{item.loanAmount || 0}}</em>
+	 <span>本{{monOrDayDesc}}放款金额数 </span><em>{{item.loanAmount || 0}}</em>&nbsp;&nbsp;&nbsp;&nbsp;
 	 <span>本{{monOrDayDesc}}放款案件数 </span><em>{{item.loanOrderNum || 0}}</em>
  </el-tab-pane>
 </el-tabs>
@@ -50,6 +50,8 @@
 				<el-table-column prop="applyId" label="产品名称">
 				</el-table-column>
 				<el-table-column prop="termNum" label="分期期数">
+				</el-table-column>
+				<el-table-column prop="confirmAmount" label="放款金额">
 				</el-table-column>
 				<el-table-column prop="principalAmount" label="本金">
 				</el-table-column>
@@ -107,6 +109,7 @@
 				monOrDayDesc : "日",
 				channelList:[{title:"test",name:"测试"}],
 				activeChannelTab:"total",
+				tempQueryParam:null,
 				getDateRange : function(choseDate,queryType){
 						var result = {};
 						if("day" == queryType) {
@@ -121,7 +124,15 @@
 			}
 		},
 		created() {
-			this.genChannelTabs([{channelDesc:"全部",loanChannel:"total"},{channelDesc:"众安",loanChannel:"za"},{channelDesc:"测试",loanChannel:"test"}]);
+			//this.genChannelTabs([{channelDesc:"全部",loanChannel:"total"},{channelDesc:"众安",loanChannel:"za"},{channelDesc:"测试",loanChannel:"test"}]);
+			//var channelList = [{channelDesc:"全部",loanChannel:"total"}];
+			this.$axios.post("/weishang-manager-webservice/wsAdmin/queryChannelList.security", {}).then((res) => {
+				res.unshift({channelDesc:"全部",loanChannel:"total"});
+				console.info(res);
+				if(res != null && res.length > 0){
+					this.genChannelTabs(res);
+				}
+			});
 
 		},
 		watch: {　　　　　　　
@@ -162,9 +173,6 @@
 						entity_item.loanOrderNum = src_item.loanOrderNum;
 					}
 				}
-			},
-			testChange(arg1,arg2,arg3){
-				console.info(this.queryByDayDate);
 			},
 			//changeQueryType
 			changeQueryType(tab, event){
@@ -209,17 +217,22 @@
 			fetchData() {
 				var dataRange = this.getDateRange(this.queryByDayDate,this.dateRangeType);
 				this.getloanAmount(dataRange);
+				this.getData(dataRange);
 			},
 			getData(dateRange) {
-
+				if(dateRange != null){
+					this.tempQueryParam = dateRange;
+				}
+				if(dateRange == null){
+					dateRange = this.tempQueryParam;
+				}
 				//按日查询 choseDate,dateFormat,queryType
 				//
 				let params = {
 					"datetimeBegin": dateRange.queryByDayDateBegin,
 					"datetimeEnd": dateRange.queryByDayDateEnd,
 					'pageSize': this.pageSize,
-					'index': this.queryPage,
-					'channelId':'LCC201709190004'
+					'index': this.queryPage
 				};
 
 				this.$axios.post("/weishang-manager-webservice/wsAdmin/loanDetail.security", params).then((res) => {
