@@ -35,12 +35,12 @@
       </el-table-column>
       <el-table-column prop="operaStatus" label="处理状态" min-width="80">
       </el-table-column>
-      <el-table-column prop="repeatStatus" label="0" min-width="80">
+      <!-- <el-table-column prop="repeatStatus" label="0" min-width="80">
       </el-table-column>
       <el-table-column prop="createTime" label="创建时间"  min-width="150">
       </el-table-column>
       <el-table-column prop="updateTime" label="更新时间" min-width="80">
-      </el-table-column>
+      </el-table-column> -->
   </el-table>
 </div>
 </div>

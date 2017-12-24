@@ -27,7 +27,33 @@
 				</el-form-item>
 		</el-form>
 
-		<el-tabs v-model="activeName" type="card">
+
+		<el-tabs v-model="activeChannelTab" type="card">
+	  <el-tab-pane
+	 	 v-for="(item, index) in channelList"
+	 	 :key="item.name"
+	 	 :label="item.title"
+	 	 :name="item.name">
+		 <p>本{{monOrDayDesc}}应还资方金额：</p>
+		 <p class="all_bank">
+			 <span>众安：        <em></em></span>
+		 </p>
+		 <p class="all_details">
+			 <span>本{{monOrDayDesc}}应收账款：   <em></em> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>实际到账金额：    <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>未到账金额：       <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>逾期案件数：      <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 </p>
+		 <p class="all_details">
+			 <span>本{{monOrDayDesc}}提前还款案件：    <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>提前还款金额：        <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>本日提前结清案件数：  <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>本日提前结清金额：    <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 </p>
+	  </el-tab-pane>
+	 </el-tabs>
+
+		<!-- <el-tabs v-model="activeName" type="card">
 		 <el-tab-pane label="总计" name="totalTab">
 			 <p>本{{monOrDayDesc}}应还资方金额：{{initData.oughtReplayAmount || 0}}</p>
 			 <p class="all_bank">
@@ -76,7 +102,7 @@
 				 <span>本{{monOrDayDesc}}提前结清金额：    <em>{{initData.advanceReplayAmount|| 0 }}</em></span>
 			 </p>
 		 </el-tab-pane>
-	 </el-tabs>
+	 </el-tabs> -->
 	 <br />
 	 <br />
 	 <el-table :data="datatable" border>
@@ -144,6 +170,8 @@
 				per_page: 15,
 				queryPage: 0,
 				pageSize: 20,
+				channelList:[{title:"test",name:"测试"}],
+				activeChannelTab:"total",
 				downloadLoading: false,
 				displayDatePicker:"display:block",
 				displayMonthPicker:"display:none",
@@ -165,12 +193,30 @@
 
 		},
 		  created(){
-
+				this.$axios.post("/weishang-manager-webservice/wsAdmin/queryChannelList.security", {}).then((res) => {
+					res.unshift({channelDesc:"全部",loanChannel:"total"});
+					console.info(res);
+					if(res != null && res.length > 0){
+						this.genChannelTabs(res);
+					}
+				});
         },
         computed: {
 
         },
         methods: {
+					genChannelTabs(srcChannelList){
+
+						var dictChannelList = [];
+						if (srcChannelList != null && srcChannelList.length > 0){
+							for(var i = 0 ; i < srcChannelList.length;i++){
+								dictChannelList.push({title:srcChannelList[i].channelDesc,name:srcChannelList[i].loanChannel});
+							}
+						}
+						this.channelList = dictChannelList;
+					},
+
+
 					changeQueryType(tab, event){
 						var tabIndex = tab.index;
 						//按日查询

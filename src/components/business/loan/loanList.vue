@@ -30,8 +30,7 @@
 	 v-for="(item, index) in channelList"
 	 :key="item.name"
 	 :label="item.title"
-	 :name="item.name"
- >
+	 :name="item.name">
 	 <span>本{{monOrDayDesc}}放款金额数 </span><em>{{item.loanAmount || 0}}</em>&nbsp;&nbsp;&nbsp;&nbsp;
 	 <span>本{{monOrDayDesc}}放款案件数 </span><em>{{item.loanOrderNum || 0}}</em>
  </el-tab-pane>
