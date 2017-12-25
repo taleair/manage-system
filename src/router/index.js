@@ -69,8 +69,11 @@ export default new Router({
               {
                   path: '/zaProxyPayMsgInfo',
                   component: resolve => require(['../components/business/za/businessManage/proxyPayMsgInfo.vue'], resolve)
-              }
-
+              },
+              {
+                  path: '/zaTransMsg',
+                  component: resolve => require(['../components/business/za/businessManage/transMsg.vue'], resolve)
+              },
               //<!-- 众安相关end-->
                 //loan后台
                 ,{

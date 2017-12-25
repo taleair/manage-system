@@ -60,6 +60,8 @@
                     @click="handleDelete(scope.$index, scope.row)">详情</el-button> -->
             <el-button size="small" type="primary"
               @click="handelShowDetail(scope.row.orderData)">数据详情</el-button>
+              <el-button size="small" type="primary"
+                @click="handelShowLog(scope.row.id)">日志信息</el-button>
           </template>
 
       </el-table-column>
@@ -86,6 +88,11 @@
         methods: {
           handelShowDetail(msg){
             alert(msg);
+          },
+          handelShowLog(orderId){
+            //location.href = "/zaTransMsg?orderId=" + orderId;
+            //?orderId=40454#/zaTransMsg
+            location.href = "/?orderId=" + orderId + "#/zaTransMsg";
           },
           getData(){
 
