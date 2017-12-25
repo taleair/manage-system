@@ -158,7 +158,7 @@
 				//总计
 				var total_item = this.channelList.getItemByEntityValue("name","total");
 				total_item.loanAmount = srcLoanAmount.loanAmount;
-				total_item.loanOrderNum = srcLoanAmount.totalCount;
+				total_item.loanOrderNum = srcLoanAmount.loanOrderNum;
 				//各个分开统计
 				var details = srcLoanAmount.details;
 				if(details != null && details.length > 0){
