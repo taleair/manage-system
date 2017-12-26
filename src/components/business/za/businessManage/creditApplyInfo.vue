@@ -77,7 +77,7 @@
             return {
                 tableData: [],
                 loading: false,
-                bizTransCode:""
+                bizTransCode:null
             }
 
         },
@@ -93,7 +93,7 @@
           handelShowLog(orderId){
             //location.href = "/zaTransMsg?orderId=" + orderId;
             //?orderId=40454#/zaTransMsg
-            location.href = "/?orderId=" + orderId + "#/zaTransMsg";
+              this.$router.push({path: '/zaTransMsg', query: {orderId: orderId}});
           },
           getData(){
 

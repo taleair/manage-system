@@ -36,7 +36,7 @@
             return {
                 tableData: [],
                 loading: false,
-                bizTransCode:""
+                bizTransCode:null
             }
 
         },
@@ -49,7 +49,8 @@
           getData(){
               let self = this;
               var queryParam = {pageSize:100000};
-              var orderId = this.$getUrlParam("orderId");
+              var orderId = this.$route.query.orderId;
+              console.info(orderId);
               queryParam.orderId = orderId;
               self.$axios.post('/weishang-manager-webservice/mgt/order/queryApiLogList', queryParam).then((res) => {
                   try{

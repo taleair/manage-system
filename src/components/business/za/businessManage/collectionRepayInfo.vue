@@ -50,7 +50,7 @@
             return {
                 tableData: [],
                 loading: false,
-                bizTransCode:""
+                bizTransCode:null
             }
 
         },

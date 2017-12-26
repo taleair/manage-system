@@ -52,7 +52,7 @@
             return {
                 tableData: [],
                 loading: true,
-                bizNo:""
+                bizNo:null
             }
 
         },
