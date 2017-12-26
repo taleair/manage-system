@@ -30,9 +30,9 @@ module.exports = {
         proxyTable: {
             '/weishang-manager-webservice':{
                 //target:'http://192.168.60.7:8080/ws/',
-                //target:'https://manager.weishangtech.com/weishang-manager-webservice/',
+                target:'https://manager.weishangtech.com/weishang-manager-webservice/',
                 //target:"http://127.0.0.1:9080/weishang-manager-webservice/",
-                target:"http://test-api.weishangtech.com/weishang-manager-webservice/",
+                // target:"http://test-api.weishangtech.com/weishang-manager-webservice/",
                 changeOrigin:true,
                 pathRewrite:{
                     '/weishang-manager-webservice':''
