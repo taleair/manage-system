@@ -34,75 +34,20 @@
 	 	 :key="item.name"
 	 	 :label="item.title"
 	 	 :name="item.name">
-		 <p>本{{monOrDayDesc}}应还资方金额：</p>
-		 <p class="all_bank">
-			 <span>众安：        <em></em></span>
+		 <p class="all_details">
+			 <span>本{{monOrDayDesc}}应收账款：  {{item.oughtReplayAmount || 0}} <em></em> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>实际到账金额：  {{item.actualReplayAmount || 0}}  <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>未到账金额：     {{item.unReplayAmount || 0}}  <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>逾期案件数：    {{item.status2Num || 0}}  <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		 </p>
 		 <p class="all_details">
-			 <span>本{{monOrDayDesc}}应收账款：   <em></em> </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 <span>实际到账金额：    <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 <span>未到账金额：       <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 <span>逾期案件数：      <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 </p>
-		 <p class="all_details">
-			 <span>本{{monOrDayDesc}}提前还款案件：    <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 <span>提前还款金额：        <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 <span>本日提前结清案件数：  <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 <span>本日提前结清金额：    <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>本{{monOrDayDesc}}提前还款案件：  {{item.status5Num || 0}}  <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>提前还款金额：     {{item.advanceReplayAmount || 0}}   <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>本日提前结清案件数： {{item.status6Num || 0}} <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <span>本日提前结清金额：  {{item.advanceReplayAmount || 0}}  <em></em></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		 </p>
 	  </el-tab-pane>
 	 </el-tabs>
-
-		<!-- <el-tabs v-model="activeName" type="card">
-		 <el-tab-pane label="总计" name="totalTab">
-			 <p>本{{monOrDayDesc}}应还资方金额：{{initData.oughtReplayAmount || 0}}</p>
-			 <p class="all_bank">
-				 <span>众安：        <em>{{totalLoan || 0}}</em></span>
-			 </p>
-			 <p class="all_details">
-				 <span>本{{monOrDayDesc}}应收账款：   <em>{{initData.planReplayAmount || 0}}</em> </span>
-				 <span>实际到账金额：    <em>{{initData.actualReplayAmount || 0 }}</em></span>
-				 <span>未到账金额：       <em>{{initData.unReplayAmount || 0}}</em></span>
-				 <span>逾期案件数：      <em>{{initData.delayCaseNum || 0}}</em></span>
-			 </p>
-			 <p class="all_details">
-				 <span>本{{monOrDayDesc}}提前还款案件：    <em>{{initData.advanceReplayNum || 0}}</em></span>
-				 <span>提前还款金额：        <em>{{initData.advanceReplayAmount || 0}}</em></span>
-				 <span>本日提前结清案件数：  <em>{{initData.advanceClearCaseNum || 0}}</em></span>
-				 <span>本日提前结清金额：    <em>{{initData.advanceReplayAmount || 0}}</em></span>
-			 </p>
-		 </el-tab-pane>
-		 <el-tab-pane label="众安" name="zaTab">
-			 <p>应还资方金额：<em>{{initData.loanAmount }}</em></p>
-			 <p class="all_details">
-				 <span>本{{monOrDayDesc}}应收账款：   <em>{{initData.planReplayAmount || 0}}</em> </span>
-				 <span>实际到账金额：    <em>{{initData.actualReplayAmount || 0}}</em></span>
-				 <span>未到账金额：       <em>{{initData.unReplayAmount || 0}}</em></span>
-				 <span>逾期案件数：      <em>{{initData.delayCaseNum || 0}}</em></span>
-			 </p>
-			 <p class="all_details">
-				 <span>本{{monOrDayDesc}}提前还款案件：    <em>{{initData.advanceReplayNum || 0}}</em></span>
-				 <span>提前还款金额：        <em>{{initData.advanceReplayAmount|| 0 }}</em></span>
-				 <span>本日提前结清案件数：  <em>{{initData.advanceClearCaseNum || 0}}</em></span>
-				 <span>本日提前结清金额：    <em>{{initData.advanceReplayAmount|| 0 }}</em></span>
-			 </p>
-		 </el-tab-pane>
-		 <el-tab-pane label="金鑫小贷" name="jxxdTab">
-			 <p>应还资方金额：<em>{{initData.loanAmount }}</em></p>
-			 <p class="all_details">
-				 <span>本{{monOrDayDesc}}应收账款：   <em>{{initData.planReplayAmount || 0}}</em> </span>
-				 <span>实际到账金额：    <em>{{initData.actualReplayAmount || 0}}</em></span>
-				 <span>未到账金额：       <em>{{initData.unReplayAmount || 0}}</em></span>
-				 <span>逾期案件数：      <em>{{initData.delayCaseNum || 0}}</em></span>
-			 </p>
-			 <p class="all_details">
-				 <span>本{{monOrDayDesc}}提前还款案件：    <em>{{initData.advanceReplayNum || 0}}</em></span>
-				 <span>提前还款金额：        <em>{{initData.advanceReplayAmount|| 0 }}</em></span>
-				 <span>本{{monOrDayDesc}}提前结清案件数：  <em>{{initData.advanceClearCaseNum || 0}}</em></span>
-				 <span>本{{monOrDayDesc}}提前结清金额：    <em>{{initData.advanceReplayAmount|| 0 }}</em></span>
-			 </p>
-		 </el-tab-pane>
-	 </el-tabs> -->
 	 <br />
 	 <br />
 	 <el-table :data="datatable" border>
@@ -234,11 +179,75 @@
 							this.monOrDayDesc ="月";
 						}
 					},
+					fetchData(){
+						var dataRange = this.getDateRange(this.queryByDayDate,this.dateRangeType);
+						this.getRepayAmount(dataRange);
+						//this.getData(dataRange);
+					},
 
+					fillLoanAmountTab(srcLoanAmount){
+						//总计
+						var total_item = this.channelList.getItemByEntityValue("name","total");
+
+						// private Long planReplayAmount;
+						// private Long actualReplayAmount;
+						// private Long unReplayAmount;
+						// private Long advanceReplayNum;
+						// private Long advanceReplayAmount;
+						// private Long advanceClearCaseNum;
+						// private Long status2Num;
+						// private Long status5Num;
+						// private Long status6Num;
+
+						total_item.planReplayAmount = srcLoanAmount.srcLoanAmount;
+						total_item.actualReplayAmount = srcLoanAmount.actualReplayAmount;
+						total_item.unReplayAmount = srcLoanAmount.unReplayAmount;
+						total_item.advanceReplayNum = srcLoanAmount.advanceReplayNum;
+						total_item.advanceReplayAmount = srcLoanAmount.advanceReplayAmount;
+						total_item.advanceClearCaseNum = srcLoanAmount.advanceClearCaseNum;
+						total_item.status2Num = srcLoanAmount.status2Num;
+						total_item.status5Num = srcLoanAmount.status5Num;
+						total_item.status6Num = srcLoanAmount.status6Num;
+
+						//各个分开统计
+						var details = srcLoanAmount.details;
+						if(details != null && details.length > 0){
+							for(var i = 0 ; i < details.length ; i++){
+								var src_item = details[i];
+								var src_item_channelCode = src_item.channelId;
+								//获取tab item
+								var entity_item = this.channelList.getItemByEntityValue("name",src_item_channelCode);
+								//赋值
+								entity_item.planReplayAmount = src_item.srcLoanAmount;
+								entity_item.actualReplayAmount = src_item.actualReplayAmount;
+								entity_item.unReplayAmount = src_item.unReplayAmount;
+								entity_item.advanceReplayNum = src_item.advanceReplayNum;
+								entity_item.advanceReplayAmount = src_item.advanceReplayAmount;
+								entity_item.advanceClearCaseNum = src_item.advanceClearCaseNum;
+								entity_item.status2Num = src_item.status2Num;
+								entity_item.status5Num = src_item.status5Num;
+								entity_item.status6Num = src_item.status6Num;
+							}
+						}
+					},
+
+					getRepayAmount(dateRange) {
+						let loanAmountParam = {
+							"datetimeBegin": dateRange.queryByDayDateBegin,
+							"datetimeEnd": dateRange.queryByDayDateEnd
+						};
+
+						this.$axios.post("/weishang-manager-webservice/wsAdmin/loanReplayAmount", loanAmountParam).then((res) => {
+							this.fillLoanAmountTab(res);
+							//这里有bug必须重新刷新tab要不值不更新
+							this.activeChannelTab = "";
+							this.activeChannelTab = "total";
+
+						});
+					}
         },
         components: {
-			// repaylistday,
-			// repaylistmonth
+
 				} //注册组件
 
 	}
