@@ -92,6 +92,10 @@
 		 <!--<el-table-column prop="loanChannel" label="放款资方">
 		 </el-table-column>-->
 	 </el-table>
+	 <div class="block">
+		 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage1" :page-size="pageSize" layout="total, prev, pager, next" :total="total">
+		 </el-pagination>
+	 </div>
 	</div>
 </template>
 
@@ -150,6 +154,13 @@
 
         },
         methods: {
+
+					handleSizeChange(val) {},
+					handleCurrentChange(val) {
+						this.queryPage = (val - 1) * this.pageSize;
+						this.getData();
+					},
+
 					genChannelTabs(srcChannelList){
 
 						var dictChannelList = [];
@@ -180,25 +191,14 @@
 						}
 					},
 					fetchData(){
-						var dataRange = this.getDateRange(this.queryByDayDate,this.dateRangeType);
-						this.getRepayAmount(dataRange);
-						//this.getData(dataRange);
+						var dateRange = this.getDateRange(this.queryByDayDate,this.dateRangeType);
+						this.getRepayAmount(dateRange);
+						this.getData (dateRange);
 					},
 
 					fillLoanAmountTab(srcLoanAmount){
 						//总计
 						var total_item = this.channelList.getItemByEntityValue("name","total");
-
-						// private Long planReplayAmount;
-						// private Long actualReplayAmount;
-						// private Long unReplayAmount;
-						// private Long advanceReplayNum;
-						// private Long advanceReplayAmount;
-						// private Long advanceClearCaseNum;
-						// private Long status2Num;
-						// private Long status5Num;
-						// private Long status6Num;
-
 						total_item.planReplayAmount = srcLoanAmount.srcLoanAmount;
 						total_item.actualReplayAmount = srcLoanAmount.actualReplayAmount;
 						total_item.unReplayAmount = srcLoanAmount.unReplayAmount;
@@ -230,7 +230,29 @@
 							}
 						}
 					},
+					getData(dateRange) {
+						if(dateRange != null){
+							this.tempQueryParam = dateRange;
+						}
+						if(dateRange == null){
+							dateRange = this.tempQueryParam;
+						}
+						//按日查询 choseDate,dateFormat,queryType
+						//
+						let params = {
+							"datetimeBegin": dateRange.queryByDayDateBegin,
+							"datetimeEnd": dateRange.queryByDayDateEnd,
+							'pageSize': this.pageSize,
+							'index': this.queryPage
+						};
 
+						this.$axios.post("/weishang-manager-webservice/wsAdmin/loanReplayDetail", params).then((res) => {
+						this.datatable = res.data;
+						this.total = res.totalcount;
+						this.per_page = res.pageSize;
+						this.current = res.pageSize;
+						});
+					},
 					getRepayAmount(dateRange) {
 						let loanAmountParam = {
 							"datetimeBegin": dateRange.queryByDayDateBegin,

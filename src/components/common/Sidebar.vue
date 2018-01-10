@@ -48,6 +48,8 @@
           var wjs_menu = {icon: 'el-icon-date',title:"网金社",index:'-1',subs : [{index : 'assetCreater',title: '产品计划导入'},{index : 'importAsset',title: '批量导入产品计划'},{index : 'assetViewer',title: '产品计划管理'},{index : 'queryAssetPool',title: '资产池'}]};
           //众安后台管理
           var za_menu = {icon:'el-icon-date',title:"众安后台管理",index:'1',subs:[{index:'zaConfirmInfo',title:'授信申请'},{index:'zacreditApplyInfo',title:'借款申请'},{index:'zaDelayRepayInfo',title:'逾期还款任务'},{index:'zaCollectionRepayInfo',title:'归集还款任务'},{index:'zaProxyPayInfo',title:'代偿处理任务'}]};
+
+          var channelAdmin = {icon: 'el-icon-date',title:"渠道管理",index:'4',subs : [{index : 'channelAdmin',title: '资金分流'}]};
           //获取权限
           var access_token = this.$getUrlParam("access_token");
           // this.$axios.post("/weishang-manager-webservice/wsAdmin/getMeum.security?access_token="+access_token, {}).then((res) => {
@@ -76,6 +78,7 @@
               this.items.push(jxxd_menu);
               this.items.push(wjs_menu);
               this.items.push(za_menu);
+              this.items.push(channelAdmin);
         }
     }
 </script>

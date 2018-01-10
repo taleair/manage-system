@@ -5,6 +5,7 @@ import axios from 'axios';
 import XLSX from 'xlsx';
 import ElementUI from 'element-ui';
 import moment from 'moment';
+import jquery from 'jquery';
 //import 'element-ui/lib/theme-default/index.css';    // 默认主题
 import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
@@ -14,6 +15,7 @@ import { Loading, Message } from 'element-ui'
 Vue.use(ElementUI);
 Vue.prototype.$axios = axios;//ajax服务
 Vue.prototype.$moment = moment;//时间计算框架
+Vue.prototype.$ = jquery;
 new Vue({
     router,
     render: h => h(App)
@@ -28,7 +30,7 @@ function _getUrlParam(name){
      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
-}
+};
 //垃圾方法，丑陋的一比以后改
 Array.prototype.getItemByEntityValue = function(key,value){
   var _thisLength = this.length ;
@@ -42,10 +44,38 @@ Array.prototype.getItemByEntityValue = function(key,value){
     }
   }
   return {};
-}
+};
 
+Array.prototype.joinObjectByKey = function(srcArr,srckey,dictKey){
+  if(!dictKey){
+    dictKey = srckey;
+  }
+  if(! srcArr || srcArr.length == 0) return;
+  for(var i = 0 ; i < srcArr.length; i++){
+    var srcItem = srcArr[i];
+    var value = srcItem[srckey];
+    var dictItem = this.getItemByEntityValue(dictKey,value);
+    Object.assign(dictItem,srcItem);
+  }
+};
 
 Vue.prototype.$getUrlParam = _getUrlParam;
+
+
+/**
+*更丑的代码 凑合先用 顺序执行器
+*
+*/
+Vue.prototype.$syncExecutor = function(){
+  var methods = arguments;
+  if(! methods || methods.length == 0){
+    return;
+  }
+  for(var i = 0 ; i < methods.length ; i++){
+    
+  }
+};
+
 axios.interceptors.request.use(config => {
   var _url = config.url;
   if(_url.indexOf(".") <= 0){
@@ -56,6 +86,11 @@ axios.interceptors.request.use(config => {
   return config;
 }, error => {
 });
+
+
+
+
+
 
 axios.interceptors.response.use(resp => {// 响应成功关闭loading
   //var header = resp.data.

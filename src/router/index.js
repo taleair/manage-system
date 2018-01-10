@@ -88,6 +88,10 @@ export default new Router({
                     path: '/loanList_jx',
                     component: resolve => require(['../components/business/loan/loanList_jx.vue'], resolve)
                 }
+                ,{
+                    path: '/channelAdmin',
+                    component: resolve => require(['../components/business/loan/loanChannelAdmin/channelAdmin.vue'], resolve)
+                }
 
             ]
         },

@@ -44,7 +44,7 @@
 			<el-table :data="datatable" border>
 				<el-table-column prop="applyId" label="申请编号" min-width="130">
 				</el-table-column>
-				<el-table-column prop="applyId" label="下单日期">
+				<el-table-column prop="confirmTime" label="下单日期">
 				</el-table-column>
 				<el-table-column prop="applyId" label="产品名称">
 				</el-table-column>
