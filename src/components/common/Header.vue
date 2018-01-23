@@ -32,7 +32,8 @@
                 if(command == 'loginout'){
                     //localStorage.removeItem('ms_username')
                     //this.$router.push('/login');
-                    location.href = "https://cms.weishangtech.com/logout?sys=2&redirect=https%3a%2f%2fmanager.weishangtech.com%2fweishang-manager-webservice%2findex.html%23%2freadme"
+                    
+                    location.href = "https://cms.weishangtech.com/logout?sys=3&redirect=https%3a%2f%2fmanager.weishangtech.com%2fweishang-manager-webservice%2findex.html%23%2freadme"
                 }
             }
         }

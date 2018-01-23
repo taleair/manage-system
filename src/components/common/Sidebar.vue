@@ -60,6 +60,7 @@
           //       this.items.push(jxxd_menu);
           //       this.items.push(wjs_menu);
           //       this.items.push(za_menu);
+          //       this.items.push(channelAdmin);
           //     }
           //     //金鑫小贷
           //     else if("customer_jx" == userKind){
@@ -68,12 +69,12 @@
           //     } else if("customer_cw" == userKind){
           //       this.items.push(ws_cw_menu);
           //       this.items.push(jxxd_menu);
+          //     }else if("admin_channel" == userKind){
+          //       this.items.push(channelAdmin);
           //     }
-          //     this.items.push(ws_cw_menu);
-          //     this.items.push(jxxd_menu);
-          //     this.items.push(wjs_menu);
-          //     this.items.push(za_menu);
           // });
+
+
               this.items.push(ws_cw_menu);
               this.items.push(jxxd_menu);
               this.items.push(wjs_menu);
