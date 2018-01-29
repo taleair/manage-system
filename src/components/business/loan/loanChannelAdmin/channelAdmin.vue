@@ -398,7 +398,10 @@
 			},
 			templateTabChange(tab, event){
 				// console.info(this.activeTab);
+				console.info(this.modTabs);
+				console.info(this.activeTab);
 				var _template = this.modTabs.getItemByEntityValue("templateId",this.activeTab);
+
 				this.currentTemplate = _template;
 				this.fillStrategy();
 			},
@@ -468,6 +471,7 @@
 					if(!currentTemplate){
 						currentTemplate = {limitStrategy:[],weightStrategy:[],weekStrategy:[]};
 					}
+
 					limitStrategyTemp.joinObjectByKey(currentTemplate.limitStrategy,"loanChannel");
 					weightStrategyTemp.joinObjectByKey(currentTemplate.weightStrategy,"loanChannel");
 					weekStrategyTemp.joinObjectByKey(currentTemplate.weekStrategy,"loanChannel");
@@ -475,6 +479,12 @@
 					this.channelListWeight = weightStrategyTemp;
 					this.checkRadio(currentTemplate.limitStrategy);
 					//时间策略
+					console.info(weekStrategyTemp);
+					for(var i = 0 ; i < weekStrategyTemp.length ; i++){
+						if(!weekStrategyTemp[i].channelWeek || weekStrategyTemp[i].channelWeek.length < 7){
+							weekStrategyTemp[i].channelWeek = [false,false,false,false,false,false,false];
+						}
+					}
 					this.channelWeek = weekStrategyTemp;
 
 			},

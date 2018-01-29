@@ -23,16 +23,6 @@
 				<el-form-item label="放款编号：">
 					<el-input v-model="orderNo" placeholder="放款编号"></el-input>
 				</el-form-item>
-				<el-form-item label="放款资方：">
-					<el-select v-model="channelId" placeholder="全部">
-						 <el-option
-							 v-for="item in channelList"
-							 :key="item.value"
-							 :label="item.value"
-							 :value="item.value">
-						 </el-option>
-					 </el-select>
-				</el-form-item>
 				<el-button class='select' type="primary" @click="getData">查询</el-button>
 		</el-form>
 	</header>
@@ -152,10 +142,7 @@
 				//this.$moment(choseDate).add(1,"d").format("YYYY-MM-DD");
 				var datetimeBegin = this.$moment(this.datetimeBegin).format("YYYY-MM-DD");
 				var datetimeEnd = this.$moment(this.datetimeEnd).add(1,"d").format("YYYY-MM-DD");
-				var channelId = this.channelId;
-				if(channelId == "全部"){
-						channelId = null;
-				};
+
 				let params = {
 					"datetimeBegin": datetimeBegin,
 					"datetimeEnd": datetimeEnd,
@@ -163,7 +150,7 @@
 					'index': this.queryPage,
 					'userName': this.userName,
 					orderNo: this.orderNo,
-					channelId:channelId
+					channelId:"龙信"
 				};
 
 				this.$axios.post("/weishang-manager-webservice/wsAdmin/loan/v2/queryReportLoanComfirm.security", params).then((res) => {

@@ -41,7 +41,7 @@
         created() {
           //console.info(this.$moment);
           //蔚商 财务相关菜单
-          var ws_cw_menu ={icon:'el-icon-date',title:"财务管理",index:'2',subs:[{index:'loanList',title:'放款列表'},{index:'loanRepayList',title:'还款对账'}]};
+          var ws_cw_menu ={icon:'el-icon-date',title:"财务管理",index:'2',subs:[{index:'loanList',title:'放款列表'},{index:'dailyReport',title:'财务日报表'}]};
           //金鑫小贷 相关菜单
           var jxxd_menu = {icon: 'el-icon-date',title:"金鑫小贷",index:'3',subs : [{index : 'loanList_jx',title: '放款列表'}]};
           //网金社 相关菜单
@@ -50,6 +50,8 @@
           var za_menu = {icon:'el-icon-date',title:"众安后台管理",index:'1',subs:[{index:'zaConfirmInfo',title:'授信申请'},{index:'zacreditApplyInfo',title:'借款申请'},{index:'zaDelayRepayInfo',title:'逾期还款任务'},{index:'zaCollectionRepayInfo',title:'归集还款任务'},{index:'zaProxyPayInfo',title:'代偿处理任务'}]};
 
           var channelAdmin = {icon: 'el-icon-date',title:"渠道管理",index:'4',subs : [{index : 'channelAdmin',title: '资金分流'}]};
+
+          var lx_menu = {icon:'el-icon-date',title:"龙信财务管理",index:'5',subs:[{index:'loanList_lx',title:'放款列表'},{index:'dailyReport_lx',title:'财务日报表'}]};
           //获取权限
           var access_token = this.$getUrlParam("access_token");
           // this.$axios.post("/weishang-manager-webservice/wsAdmin/getMeum.security?access_token="+access_token, {}).then((res) => {
@@ -80,6 +82,7 @@
               this.items.push(wjs_menu);
               this.items.push(za_menu);
               this.items.push(channelAdmin);
+              this.items.push(lx_menu);
         }
     }
 </script>

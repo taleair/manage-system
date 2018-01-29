@@ -81,16 +81,31 @@ export default new Router({
                     component: resolve => require(['../components/business/loan/loanList.vue'], resolve)
                 }
                 ,{
-                    path: '/loanRepayList',
-                    component: resolve => require(['../components/business/loan/repayList.vue'], resolve)
+                    path: '/dailyReport',
+                    component: resolve => require(['../components/business/loan/dailyReport.vue'], resolve)
+                }
+                ,
+
+                {
+                    path: '/loanList_lx',
+                    component: resolve => require(['../components/business/loan/loanList_lx.vue'], resolve)
                 }
                 ,{
+                    path: '/dailyReport_lx',
+                    component: resolve => require(['../components/business/loan/dailyReport_lx.vue'], resolve)
+                }
+                ,
+
+                {
                     path: '/loanList_jx',
                     component: resolve => require(['../components/business/loan/loanList_jx.vue'], resolve)
                 }
                 ,{
                     path: '/channelAdmin',
                     component: resolve => require(['../components/business/loan/loanChannelAdmin/channelAdmin.vue'], resolve)
+                },{
+                    path: '/repayDetail',
+                    component: resolve => require(['../components/business/loan/repayDetail.vue'], resolve)
                 }
 
             ]
